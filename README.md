@@ -8,6 +8,7 @@ http://ftp.riken.go.jp/pub/Linux/kernel/people/geoff/cell/ps3-howto/ps3-nfs-root
 
 and 
 
+http://jk.ozlabs.org/blog/post/158/netbooting-petitboot/
 
 
 I use the petitboot binary wich is currently on github at https://github.com/nevik-xx/dtbImage.ps3
@@ -99,6 +100,9 @@ proc                                            /proc           proc            
 ##UUID=56b43361-0447-4fd5-b575-3592112b9da0                                              none            swap            sw                              0       0
 /dev/cdrom                                      /media/cdrom0   udf,iso9660     user,noauto                             0       0
 
+
+#You can add but it's not necessary
+/dev/nfs    /    rootfs    defaults   0 0
 
 (live)ps3@redribbon:~$ mount | grep root
 192.168.121.40:/nfs/ps3/rootfs on / type nfs (rw,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,proto=tcp,port=2049,timeo=7,retrans=10,sec=sys,local_lock=all,addr=192.168.121.40)
