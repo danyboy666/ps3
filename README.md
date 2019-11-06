@@ -10,6 +10,7 @@ and
 
 http://jk.ozlabs.org/blog/post/158/netbooting-petitboot/
 
+Stage 1 : petitboot bootloader
 
 I use the petitboot binary wich is currently on github at https://github.com/nevik-xx/dtbImage.ps3
 
@@ -18,6 +19,9 @@ The ps3 need to be prepared before hand:
 - from 3.41 or 3.55 install and do the necessary to install otheros++ 
 - boot into otheros and run the live installer
 - install it wherever you like (usb drive, usb key, internal HDD) I don't recommend internal since it will wipe your hard drive; instead install to a usb drive and reboot into it.
+
+Stage 2 : booting image and loading initrd
+
 - upgrade your apt/sources.list with method described in this article https://redribbongnulinux.000webhostapp.com/ 
 
 I think it's safe to comment the lines 
@@ -95,7 +99,7 @@ iface eth0 inet dhcp
  The wireless network interface
 auto wlan0
 
-
+ * Need to assign same ip adress that DHCP server assigned us at initial request
 
  /etc/fstab: static file system information.
 
