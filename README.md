@@ -20,6 +20,11 @@ The ps3 need to be prepared before hand:
 - install it wherever you like (usb drive, usb key, internal HDD) I don't recommend internal since it will wipe your hard drive; instead install to a usb drive and reboot into it.
 - upgrade your apt/sources.list with method described in this article https://redribbongnulinux.000webhostapp.com/ 
 
+I think it's safe to comment the lines 
+
+#deb http://security.debian.org/ jessie/updates main
+#deb http://www.deb-multimedia.org/ stable main
+
 - sudo apt-get udpate && sudo apt-get upgrade 
      If the upgrade completed without errors you can reboot to make sure you can actually boot into the new kernel 
      (actually i was able to install nfs-common and use the command sudo modprobe nfs to load the nfs module. 
