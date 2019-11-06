@@ -105,5 +105,7 @@ proc                                            /proc           proc            
 
 
 
+live)ps3@redribbon:~$ uname -a
+Linux redribbon 3.12.6-red-ribbon-powerpc64-ps3 #7 SMP Tue Jan 7 17:09:59 CET 2014 ppc64 GNU/Linux
 
 
