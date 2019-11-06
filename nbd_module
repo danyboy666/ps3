@@ -4,31 +4,43 @@ Compile a new kernel
 
 I did it on the PS3
 
-Cross compile ncurses and install it
-GHC depends on a native version of ncurses. You need to compile --with-termlib because otherwise ncurses doesn't provide the library files the ghc wants. You also need -P on CPPFLAGS.
+source : http://redribbongnulinux.000webhostapp.com/feature-requests/
 
-wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.0.tar.gz
-tar xf ncurses-6.0.tar.gz
-cd ncurses-6.0
-./configure --host=powerpc64-linux-gnu --prefix=$PREFIX --with-termlib CPPFLAGS=-P
-make
-make install
+sudo apt-get install linux-source-3.12.6-red-ribbon-powerpc64-ps3
 
 
-linux-3.16.2
-------------
 
-http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.16.2.tar.gz
 
-tar xvjf linux-3.16.2.tar.gz
-cd linux-3.16.2
-make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- ps3_defconfig
-make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- menuconfig
-make ARCH=powerpc CROSS_COMPILE=powerpc64-linux-
-mkdir -p $HOME/linux-3.16.2-build/boot
-make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- install INSTALL_PATH=$HOME/linux-3.16.2-build/boot
-make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- modules_install INSTALL_MOD_PATH=$HOME/linux-3.16.2-build
-make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- headers_install INSTALL_HDR_PATH=$HOME/linux-3.16.2-build/usr
+The kernel compilation is easy. First, you need to install the following packages:
+
+sudo apt-get update
+sudo apt-get install -y kernel-package fakeroot linux-source-3.12.6-red-ribbon-powerpc64-ps3 build-essential libssl-dev libncurses5-dev bison flex
+
+
+Go to your source linux directory and copy the config file from /boot renaming to “.config”:
+
+cd /boot
+
+ls -la
+
+cp /boot/config-3.12.6-red-ribbon-powerpc64 .config
+
+cd /usr/src/linux-headers-$(uname -r)/
+
+You can costumize the kernel configuration using the following command:
+
+make menuconfig
+
+And you can build the kernel package:
+
+sudo fakeroot make-kpkg --initrd --append-to-version=-injection kernel_image kernel_headers <<<<<<--------- failing here
+
+Be patient, the above process will take a while.
+
+It will generate a linux-image-(version) deb package one level up, which you can then install with dpkg:
+
+dpkg -i ../linux-image-3.12.6-red-ribbon-powerpc64*.deb
+
 
 
 
