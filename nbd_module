@@ -1,0 +1,43 @@
+# WIP
+
+Compile a new kernel 
+
+I did it on the PS3
+
+Cross compile ncurses and install it
+GHC depends on a native version of ncurses. You need to compile --with-termlib because otherwise ncurses doesn't provide the library files the ghc wants. You also need -P on CPPFLAGS.
+
+wget https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.0.tar.gz
+tar xf ncurses-6.0.tar.gz
+cd ncurses-6.0
+./configure --host=powerpc64-linux-gnu --prefix=$PREFIX --with-termlib CPPFLAGS=-P
+make
+make install
+
+
+linux-3.16.2
+------------
+
+http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.16.2.tar.gz
+
+tar xvjf linux-3.16.2.tar.gz
+cd linux-3.16.2
+make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- ps3_defconfig
+make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- menuconfig
+make ARCH=powerpc CROSS_COMPILE=powerpc64-linux-
+mkdir -p $HOME/linux-3.16.2-build/boot
+make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- install INSTALL_PATH=$HOME/linux-3.16.2-build/boot
+make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- modules_install INSTALL_MOD_PATH=$HOME/linux-3.16.2-build
+make ARCH=powerpc CROSS_COMPILE=powerpc64-linux- headers_install INSTALL_HDR_PATH=$HOME/linux-3.16.2-build/usr
+
+
+
+sudo apt-get install nbd-client
+sudo modprobe nbd
+
+sudo update-initramfs -u
+
+pass necessary DHCP options to boot off nbd target
+
+reboot
+
