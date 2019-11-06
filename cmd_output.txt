@@ -1,0 +1,17 @@
+(live)ps3@redribbon:~$ df -h
+Sys. de fichiers               Taille Utilisé Dispo Uti% Monté sur
+192.168.121.40:/nfs/ps3/rootfs    16G     15G  477M  97% /
+udev                              10M       0   10M   0% /dev
+tmpfs                             23M    536K   22M   3% /run
+tmpfs                            5,0M       0  5,0M   0% /run/lock
+tmpfs                             45M     76K   44M   1% /run/shm
+/dev/ps3da2                      449G    329G   85G  80% /mnt/ps3da2
+/dev/ps3da3                      2,0G     32K  2,0G   1% /mnt/ps3da3
+/dev/ps3db                       449G    329G   85G  80% /mnt/ps3db
+/dev/ps3dc                       2,0G     32K  2,0G   1% /mnt/ps3dc
+/dev/ps3flasha2                  200M    198M  2,4M  99% /mnt/ps3flasha2
+/dev/ps3flasha3                   16M    520K   16M   4% /mnt/ps3flasha3
+/dev/ps3flasha4                  472K       0  472K   0% /mnt/ps3flasha4
+/dev/ps3flashc                   200M    198M  2,4M  99% /mnt/ps3flashc
+/dev/ps3flashd                    16M    520K   16M   4% /mnt/ps3flashd
+/dev/ps3flashe                   472K       0  472K   0% /mnt/ps3flashe
