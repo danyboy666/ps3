@@ -18,16 +18,11 @@ The ps3 need to be prepared before hand:
 - from 3.41 or 3.55 install and do the necessary to install otheros++ 
 - boot into otheros and run the live installer
 - install it wherever you like (usb drive, usb key, internal HDD) I don't recommend internal since it will wipe your hard drive; instead install to a usb drive and reboot into it.
-- upgrade your apt/sources.list with method descripbe in tis article https://redribbongnulinux.000webhostapp.com/ ( basicaly you change all occurences “ftp.debian.org” to “archive.debian.org”.) also comment everything you need is in archive anyway 
-#deb http://security.debian.org/ jessie/updates main
-#deb http://www.deb-multimedia.org/ jessie main non-free
-#deb http://apt.redribbon.t15.org/ jessie main
+- upgrade your apt/sources.list with method described in this article https://redribbongnulinux.000webhostapp.com/ 
 
-
-- sudo apt-get udpate&& sudo apt-get upgrade 
+- sudo apt-get udpate && sudo apt-get upgrade 
      If the upgrade completed without errors you can reboot to make sure you can actually boot into the new kernel 
-     (actually i was able to install nfs-common and use the command sudo modprobe nfs to load the nfs module.
-     
+     (actually i was able to install nfs-common and use the command sudo modprobe nfs to load the nfs module. 
 
 - once in the new kernel ( or before you reboot into it) 
      1) sudo apt-get install nfs-common && sudo modprobe nfs (or some debian variant of that)
@@ -114,7 +109,7 @@ proc                                            /proc           proc            
 
 
 
-live)ps3@redribbon:~$ uname -a
+(live)ps3@redribbon:~$ uname -a
 Linux redribbon 3.12.6-red-ribbon-powerpc64-ps3 #7 SMP Tue Jan 7 17:09:59 CET 2014 ppc64 GNU/Linux
 
 
