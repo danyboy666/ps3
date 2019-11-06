@@ -2,6 +2,14 @@
 
 This repo is a collection of notes from my tests booting redribbon linux 3.12.6 from an NFS rootfs.
 
+I use scattered information available around but most of the usefull info comes from 
+
+http://ftp.riken.go.jp/pub/Linux/kernel/people/geoff/cell/ps3-howto/ps3-nfs-root-howto.txt
+
+and 
+
+
+
 I use the petitboot binary wich is currently on github at https://github.com/nevik-xx/dtbImage.ps3
 
 The ps3 need to be prepared before hand:
@@ -35,9 +43,17 @@ use a combination of DHCP options ; right now what's working for me (partially I
 TFTP Server : IP_OF_TFTP_SERVER
 Next server : same
 root-path : IP_OF_NFS_SERVER/nfs/ps3/rootfs
-option 67 string "http://IP_OF_TFTP_SERVER/pxelinux/pxelinux.cfg/C0A879C8"
+option 67 string "http://IP_OF_TFTP_SERVER/pxelinux/kernel/ps3/vmlinux"
 or
-option 209 string "http://IP_OF_TFTP_SERVER/pxelinux/pxelinux.cfg/C0A879C8"
+option 209 string "http://IP_OF_TFTP_SERVER/pxelinux/pxelinux.cfg/C0A879C8" # doesnt work as for now here it's content 
+
+default ps3
+
+label ps3
+        kernel http://192.168.121.55/pxelinux/kernel/ps3/vmlinux
+        initrd http://192.168.121.55/pxelinux/img/ps3/initrd.img
+        append rootfstype=nfs nfsroot=192.168.121.40:/nfs/ps3/rootfs root=/dev/nfs ip=bootp fsck.repair=yes rw --
+
 
 
 
@@ -60,27 +76,27 @@ This needs to be sorted out but i can definitly reach the nfsroot when i pass bo
  I edited fstab to prevent the original physical partition to be mounted as well as the swap line for now.
  Also network/interface
 
-# This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
-# The loopback network interface
+ This file describes the network interfaces available on your system
+ and how to activate them. For more information, see interfaces(5).
+ The loopback network interface
 auto lo
 iface lo inet loopback
-# The wired network interface
+ The wired network interface
 allow-hotplug eth0
-#iface eth0 inet dhcp
+iface eth0 inet dhcp
 manual eth0
 iface eth0 inet dhcp
-# The wireless network interface
+ The wireless network interface
 auto wlan0
 
 
 
-# /etc/fstab: static file system information.
-#
-# <file system>                                 <mount point>   <type>          <options>                               <dump>  <pass>
+ /etc/fstab: static file system information.
+
+ <file system>                                 <mount point>   <type>          <options>                               <dump>  <pass>
 proc                                            /proc           proc            defaults                                0       0
-#UUID=41603647-63ea-4484-8067-e6465d4fb2e0                                              /               ext4            relatime,defaults,errors=remount-ro                             0       1
-#UUID=56b43361-0447-4fd5-b575-3592112b9da0                                              none            swap            sw                              0       0
+##UUID=41603647-63ea-4484-8067-e6465d4fb2e0                                              /               ext4            relatime,defaults,errors=remount-ro                             0       1
+##UUID=56b43361-0447-4fd5-b575-3592112b9da0                                              none            swap            sw                              0       0
 /dev/cdrom                                      /media/cdrom0   udf,iso9660     user,noauto                             0       0
 
 
